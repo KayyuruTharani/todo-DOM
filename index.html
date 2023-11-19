@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #taskInput {
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .delete {
+            color: red;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>To-Do List</h2>
+
+    <input type="text" id="taskInput" placeholder="Add a new task">
+    <button onclick="addTask()">Add Task</button>
+
+    <ul id="taskList">
+        <!-- Tasks will be added here dynamically -->
+    </ul>
+
+    <script>
+        function addTask() {
+            var input = document.getElementById("taskInput");
+            var taskText = input.value.trim();
+
+            if (taskText === "") {
+                alert("Please enter a task.");
+                return;
+            }
+
+            // Create a new list item
+            var listItem = document.createElement("li");
+            listItem.textContent = taskText;
+
+            // Create a delete button
+            var deleteButton = document.createElement("span");
+            deleteButton.textContent = "Delete";
+            deleteButton.className = "delete";
+            deleteButton.onclick = function() {
+                listItem.parentNode.removeChild(listItem);
+            };
+
+            // Append the delete button to the list item
+            listItem.appendChild(deleteButton);
+
+            // Append the list item to the task list
+            document.getElementById("taskList").appendChild(listItem);
+
+            // Clear the input field
+            input.value = "";
+        }
+    </script>
+
+</body>
+</html>
